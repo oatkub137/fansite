@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Our Blog ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    font-family: 'Kanit', sans-serif;
+    margin: 0;
+    background: #fff0f6;
+    padding: 20px;
+  }
+
+  h1 {
+    color: #ff4f8b;
+    text-align: center;
+  }
+
+  .form-box {
+    background: white;
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 6px 15px rgba(255, 99, 140, 0.2);
+    width: 90%;
+    margin: 20px auto;
+  }
+
+  .form-box input, .form-box textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border-radius: 10px;
+    border: 1px solid #ffb6d1;
+  }
+
+  .form-box button {
+    width: 100%;
+    padding: 12px;
+    background: #ff5e9c;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    margin-top: 15px;
+    cursor: pointer;
+  }
+
+  .form-box button:hover {
+    background: #ff3f89;
+  }
+
+  #blogList {
+    width: 92%;
+    margin: 30px auto;
+  }
+
+  .blog-card {
+    background: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(255, 99, 140, 0.2);
+  }
+
+  .blog-card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 10px;
+  }
+
+  .date {
+    font-size: 14px;
+    color: #888;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>บันทึกรักของเรา ❤️</h1>
+
+<div class="form-box">
+  <h3>➕ เพิ่มเรื่องราวใหม่</h3>
+
+  <label>เลือกรูป</label>
+  <input type="file" id="image" accept="image/*">
+
+  <label>ข้อความ</label>
+  <textarea id="text" rows="4" placeholder="วันนี้เราไปทำอะไรมาด้วยกัน..."></textarea>
+
+  <label>วันที่</label>
+  <input type="date" id="date">
+
+  <button onclick="saveBlog()">บันทึก</button>
+</div>
+
+<h2 style="text-align:center;color:#ff4f8b;">📘 เรื่องราวทั้งหมด</h2>
+<div id="blogList"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

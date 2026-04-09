@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>เราคบกัน 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  body{
+    margin:0;
+    font-family:'Kanit', sans-serif;
+    background: linear-gradient(180deg,#fff0f5,#ffe6f0);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+  }
+
+  .card{
+    background:white;
+    padding:25px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(255,105,135,0.2);
+  }
+
+  img{
+    width:200px;
+    border-radius:20px;
+    margin-bottom:15px;
+  }
+
+  #time{
+    font-size:18px;
+    color:#ff6f9c;
+    margin-top:10px;
+  }
+</style>
+</head>
+<body><div class="card">
+  <h2>💖 เราคบกันมาแล้ว 💖</h2>
+  <img src="img/fan.png">
+  <h3>เราคบกันวันที่ 9 ก.ค 2025</h3>
+  <div id="time"></div>
+</div>
+
+<script>
+const start = new Date('2025-07-09T00:00:00');
+
+function updateTime(){
+  const now = new Date();
+  let diff = now - start;
+
+  let days = Math.floor(diff / (1000*60*60*24));
+  let hours = Math.floor((diff / (1000*60*60)) % 24);
+  let minutes = Math.floor((diff / (1000*60)) % 60);
+  let seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById('time').innerText =
+    days + ' วัน ' + hours + ' ชั่วโมง ' + minutes + ' นาที ' + seconds + ' วินาที ❤️';
+}
+
+setInterval(updateTime,1000);
+updateTime();
+</script>
+
+</body>
+</html>

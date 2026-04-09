@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>ปฏิทินรายวัน</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  body{
+    margin:0;
+    font-family:'Kanit', sans-serif;
+    background: linear-gradient(180deg,#fff0f5,#ffe6f0);
+    text-align:center;
+  }
+
+  h1{
+    margin-top:20px;
+    color:#ff6f9c;
+  }
+
+  .days{
+    width:90%;
+    margin:20px auto;
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap:10px;
+  }
+
+  .day{
+    padding:15px;
+    background:white;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(255,105,135,0.2);
+    cursor:pointer;
+    transition:0.2s;
+  }
+  .day:hover{ transform:scale(1.05); }
+
+  #editor{
+    width:90%;
+    max-width:450px;
+    margin:20px auto;
+    padding:20px;
+    background:white;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+    display:none;
+  }
+
+  input, textarea{
+    width:100%;
+    margin:10px 0;
+    padding:10px;
+    border-radius:10px;
+    border:none;
+    background:#ffe6f0;
+    font-size:16px;
+    font-family:'Kanit';
+  }
+
+  button{
+  padding:25px;               /* ⭐ ปุ่มใหญ่ขึ้น */
+  border-radius:20px;         /* ⭐ มุมมนมากขึ้น */
+  border:none;
+  background: linear-gradient(145deg,#ff7fb0,#ff5c98);  /* ⭐ สีใหม่เหมือนรูป */
+  color:white;
+  font-size:22px;             /* ⭐ ตัวอักษรใหญ่ขึ้น */
+  font-family:'Kanit', sans-serif;
+  cursor:pointer;
+  box-shadow:0 8px 18px rgba(255,105,135,0.35);  /* ⭐ เงานุ่ม */
+  transition:0.15s;
+}
+
+button:active{
+  transform:scale(0.94);
+}
+
+.keypad{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;   /* ⭐ ระยะห่างใหญ่ขึ้น */
+  margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="monthTitle">เดือน</h1>
+
+<div class="days" id="dayGrid"></div>
+
+<div id="editor">
+  <h2 id="editTitle"></h2>
+
+  <input type="file" id="imgInput">
+  <textarea id="note" placeholder="พิมพ์คำอธิบายวันนี้..."></textarea>
+
+  <button onclick="upload()">บันทึกวันนี้</button>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const month = params.get("m");
+let selectedDay = null;
+
+document.getElementById("monthTitle").innerText = "เดือน: " + month;
+
+let daysInMonth = new Date(2025, month, 0).getDate();
+
+let grid = document.getElementById("dayGrid");
+for(let d=1; d<=daysInMonth; d++){
+  let div = document.createElement("div");
+  div.className = "day";
+  div.innerHTML = d;
+  div.onclick = () => openDay(d);
+  grid.appendChild(div);
+}
+
+function openDay(d){
+  selectedDay = d;
+  document.getElementById("editTitle").innerText = "วันที่ " + d + " / เดือน " + month;
+  document.getElementById("editor").style.display = "block";
+}
+
+function upload(){
+  let file = document.getElementById("imgInput").files[0];
+  let note = document.getElementById("note").value;
+
+  let formData = new FormData();
+  formData.append("image", file);
+
+  fetch("upload.php", {
+    method: "POST",
+    body: formData
+  })
+  .then(r => r.json())
+  .then(data => {
+    if(data.status === "success"){
+      alert("บันทึกแล้ว!\nรูปอยู่ที่: " + data.path + "\nข้อความ: " + note);
+    }else{
+      alert("อัปโหลดล้มเหลว");
+    }
+  })
+}
+</script>
+
+</body>
+</html>

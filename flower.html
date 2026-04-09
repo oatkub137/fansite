@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>ดอกไม้ 💐</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  body{
+    margin:0;
+    font-family:'Kanit', sans-serif;
+    background: linear-gradient(180deg,#fff0f5,#ffe6f0);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    text-align:center;
+  }
+
+  .card{
+    width:90%;
+    max-width:380px;
+    padding:25px;
+    border-radius:25px;
+    background:white;
+    box-shadow:0 10px 25px rgba(255,105,135,0.2);
+  }
+
+  h1{
+    font-size:22px;
+    color:#ff6f9c;
+    margin-bottom:15px;
+  }
+
+  .photo-box{
+    width:100%;
+    height:240px;
+    border-radius:20px;
+    background:#ffe6f0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    margin-bottom:20px;
+  }
+
+  .photo-box img{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+  }
+  
+
+  /* ✅ ปุ่มใช้ฟอนต์ Kanit แล้ว */
+  .btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:20px;
+    background: linear-gradient(145deg,#ff8fb1,#ff6f9c);
+    color:white;
+    font-size:18px;
+    font-family:'Kanit', sans-serif;  /* ← เพิ่มตรงนี้ */
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(255,105,135,0.3);
+    transition:0.2s;
+  }
+
+  .btn:hover{
+    transform:scale(1.05);
+  }
+
+  .btn:active{
+    transform:scale(0.95);
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    
+  <h1>🌸 นี้ดอกไม้สำหรับคนน่ารัก 🌸</h1>
+
+  <div class="photo-box">
+    <img src="img/flo.png" alt="flower">
+  </div>
+
+  <button class="btn" onclick="location.href='menu.html'">
+    รับดอกไม้ 💐
+  </button>
+</div>
+
+</body>
+</html>
