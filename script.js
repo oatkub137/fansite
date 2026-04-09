@@ -1,17 +1,17 @@
-// 1. ตั้งค่า Firebase Configuration (ใช้ข้อมูลที่คุณส่งมา)
+// ข้อมูลที่คุณได้จาก Firebase Console
 const firebaseConfig = {
-  apiKey: "AIzaSyBsee_dvQy7s71K7T0BEAD9ZqzQXiKlAUo",
-  authDomain: "fansite-loveyou.firebaseapp.com",
-  projectId: "fansite-loveyou",
-  storageBucket: "fansite-loveyou.firebasestorage.app",
-  messagingSenderId: "259409320933",
-  appId: "1:259409320933:web:5af20a961db86c3024ad0c",
-  measurementId: "G-26K5JEJF3K",
-  // อย่าลืม! ถ้าใช้ Realtime Database ต้องมีบรรทัด databaseURL ด้วย
-  databaseURL: "https://fansite-loveyou-default-rtdb.firebaseio.com" 
+    apiKey: "AIzaSyBsee_dvQy7s71K7T0BEAD9ZqzQXiKlAUo",
+    authDomain: "fansite-loveyou.firebaseapp.com",
+    projectId: "fansite-loveyou",
+    storageBucket: "fansite-loveyou.firebasestorage.app",
+    messagingSenderId: "259409320933",
+    appId: "1:259409320933:web:5af20a961db86c3024ad0c",
+    measurementId: "G-26K5JEJF3K",
+    // บรรทัดนี้สำคัญมากสำหรับการใช้ Realtime Database
+    databaseURL: "https://fansite-loveyou-default-rtdb.firebaseio.com" 
 };
 
-// 2. เริ่มต้นการทำงานของ Firebase
+// เริ่มต้น Firebase
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
@@ -20,19 +20,17 @@ const modal = document.getElementById('uploadModal');
 const openBtn = document.getElementById('openModalBtn');
 const closeBtn = document.querySelector('.close-btn');
 
-// --- ฟังก์ชันการทำงานเหมือนเดิม ---
-
 // เปิด-ปิด Pop-up
 openBtn.onclick = () => modal.style.display = "block";
 closeBtn.onclick = () => modal.style.display = "none";
 
-// โหลดข้อมูลจาก Firebase
+// โหลดข้อมูลจาก Firebase แบบ Realtime
 database.ref('posts').on('value', (snapshot) => {
     blogList.innerHTML = "";
     const data = snapshot.val();
     if (data) {
-        // ดึงค่ามาเป็น Array และเรียงจากเก่าไปใหม่ เพื่อให้ของใหม่ไปต่อท้าย (อยู่บนปุ่ม)
         const postsArray = Object.values(data);
+        // เรียงจากเก่าไปใหม่ เพื่อให้ของใหม่ไปอยู่ล่างสุด (เหนือปุ่ม)
         postsArray.sort((a, b) => a.id - b.id);
         
         postsArray.forEach(post => {
@@ -48,7 +46,7 @@ database.ref('posts').on('value', (snapshot) => {
     }
 });
 
-// บันทึกข้อมูล
+// บันทึกข้อมูลลง Firebase
 document.getElementById('saveBtn').onclick = () => {
     const imgFile = document.getElementById('imageInput').files[0];
     const text = document.getElementById('textInput').value;
@@ -56,7 +54,6 @@ document.getElementById('saveBtn').onclick = () => {
 
     if (!imgFile || !text || !date) return alert("กรอกข้อมูลให้ครบก่อนนะจ๊ะ ❤️");
 
-    // โหลดรูปภาพ
     const reader = new FileReader();
     reader.onload = (e) => {
         database.ref('posts').push({
@@ -70,8 +67,6 @@ document.getElementById('saveBtn').onclick = () => {
             document.getElementById('imageInput').value = "";
             document.getElementById('textInput').value = "";
             document.getElementById('dateInput').value = "";
-        }).catch(err => {
-            alert("เกิดข้อผิดพลาดในการบันทึก: " + err.message);
         });
     };
     reader.readAsDataURL(imgFile);
