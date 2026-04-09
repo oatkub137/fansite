@@ -1,0 +1,88 @@
+/* การตั้งค่าพื้นฐาน */
+body {
+    font-family: 'Kanit', sans-serif;
+    background: #fff0f6;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+#blogContainer {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* รายการโพสต์ */
+.blog-card {
+    background: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(255, 79, 139, 0.1);
+}
+
+.blog-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* ปุ่มเพิ่มข้อมูลขนาดเล็กตรงกลาง */
+.action-area {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+.small-add-btn {
+    background: #ff4f8b;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Modal / Pop-up */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background: white;
+    width: 85%;
+    max-width: 400px;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    right: 15px; top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; color: #ff4f8b; margin-bottom: 5px; }
+.form-group input, .form-group textarea {
+    width: 100%; padding: 10px; border: 1px solid #ffd1e1; border-radius: 10px;
+}
+
+.save-btn {
+    width: 100%; background: #ff4f8b; color: white; border: none;
+    padding: 10px; border-radius: 10px; cursor: pointer;
+}
