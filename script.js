@@ -1,16 +1,17 @@
-// 1. ตั้งค่าการเชื่อมต่อ Firebase (อัปเดต databaseURL ตามที่คุณส่งมา)
+// ตั้งค่า Firebase ด้วยข้อมูลของคุณ
 const firebaseConfig = {
-  apiKey: "AIzaSyBsee_dvQy7s71K7T0BEAD9ZqzQXiKlAUo",
-  authDomain: "fansite-loveyou.firebaseapp.com",
-  projectId: "fansite-loveyou",
-  storageBucket: "fansite-loveyou.firebasestorage.app",
-  messagingSenderId: "259409320933",
-  appId: "1:259409320933:web:5af20a961db86c3024ad0c",
-  measurementId: "G-26K5JEJF3K",
-  databaseURL: "https://fansite-loveyou-default-rtdb.asia-southeast1.firebasedatabase.app/" 
+    apiKey: "AIzaSyBsee_dvQy7s71K7T0BEAD9ZqzQXiKlAUo",
+    authDomain: "fansite-loveyou.firebaseapp.com",
+    projectId: "fansite-loveyou",
+    storageBucket: "fansite-loveyou.firebasestorage.app",
+    messagingSenderId: "259409320933",
+    appId: "1:259409320933:web:5af20a961db86c3024ad0c",
+    measurementId: "G-26K5JEJF3K",
+    // ลิงก์ฐานข้อมูลโซนเอเชียที่คุณสร้าง
+    databaseURL: "https://fansite-loveyou-default-rtdb.asia-southeast1.firebasedatabase.app/" 
 };
 
-// 2. เริ่มต้นระบบ
+// เริ่มต้น Firebase
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
@@ -26,13 +27,13 @@ window.onclick = (event) => {
   if (event.target == modal) modal.style.display = "none";
 };
 
-// 3. โหลดข้อมูลจาก Firebase (ดึงข้อมูลมาแสดงผล)
+// ดึงข้อมูลมาแสดงผลแบบ Realtime
 database.ref('blogs').on('value', (snapshot) => {
     blogList.innerHTML = "";
     const data = snapshot.val();
     if (data) {
         const blogsArray = Object.values(data);
-        // เรียงลำดับให้ของใหม่ไปอยู่ข้างบนปุ่มเพิ่ม (เรียงตามเวลาที่สร้าง)
+        // เรียงจากเก่าไปใหม่ เพื่อให้ของใหม่สุดอยู่ล่างสุดแต่เหนือปุ่ม
         blogsArray.sort((a, b) => a.createdAt - b.createdAt);
         
         blogsArray.forEach(b => {
@@ -45,18 +46,16 @@ database.ref('blogs').on('value', (snapshot) => {
             `;
             blogList.appendChild(card);
         });
-    } else {
-        blogList.innerHTML = "<p style='text-align:center; color:#888;'>ยังไม่มีความทรงจำใหม่ๆ เลย เพิ่มเลยสิ! ❤️</p>";
     }
 });
 
-// 4. บันทึกข้อมูลลง Firebase
+// บันทึกข้อมูล
 document.getElementById("saveBtn").onclick = () => {
-  const imageFile = document.getElementById("image").files[0];
-  const text = document.getElementById("text").value;
-  const date = document.getElementById("date").value;
+  const imageInput = document.getElementById("imageInput");
+  const textInput = document.getElementById("textInput");
+  const dateInput = document.getElementById("dateInput");
 
-  if (!imageFile || !text || !date) {
+  if (!imageInput.files[0] || !textInput.value || !dateInput.value) {
     alert("กรอกข้อมูลให้ครบก่อนนะ ❤️");
     return;
   }
@@ -65,8 +64,8 @@ document.getElementById("saveBtn").onclick = () => {
   reader.onload = function(e) {
     const newBlog = {
       image: e.target.result,
-      text: text,
-      date: date,
+      text: textInput.value,
+      date: dateInput.value,
       createdAt: Date.now()
     };
 
@@ -74,11 +73,11 @@ document.getElementById("saveBtn").onclick = () => {
         .then(() => {
             modal.style.display = "none";
             // ล้างค่าฟอร์ม
-            document.getElementById("image").value = "";
-            document.getElementById("text").value = "";
-            document.getElementById("date").value = "";
+            imageInput.value = "";
+            textInput.value = "";
+            dateInput.value = "";
         })
-        .catch(err => alert("เกิดข้อผิดพลาด: " + err.message));
+        .catch(err => alert("บันทึกไม่ได้: " + err.message));
   };
-  reader.readAsDataURL(imageFile);
+  reader.readAsDataURL(imageInput.files[0]);
 };
