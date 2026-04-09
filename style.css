@@ -1,4 +1,4 @@
-/* การตั้งค่าพื้นฐาน */
+/* 1. การตั้งค่าพื้นฐาน */
 body {
     font-family: 'Kanit', sans-serif;
     background: #fff0f6;
@@ -10,6 +10,11 @@ body {
     color: #444;
 }
 
+header h1 {
+    color: #ff4f8b;
+    margin-bottom: 30px;
+}
+
 #blogContainer {
     width: 100%;
     max-width: 500px;
@@ -17,19 +22,15 @@ body {
     flex-direction: column;
 }
 
-header h1 {
-    color: #ff4f8b;
-    margin-bottom: 30px;
-}
-
-/* รายการโพสต์ */
+/* 2. รายการโพสต์ (Blog Card) */
 .blog-card {
     background: white;
     padding: 15px;
     margin-bottom: 20px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(255, 79, 139, 0.1);
-    animation: fadeIn 0.5s ease; /* เพิ่มเอฟเฟกต์ตอนโพสต์ใหม่เด้งขึ้นมา */
+    position: relative; /* สำคัญ: เพื่อให้ปุ่มลบวางชิดมุมได้ */
+    animation: fadeIn 0.5s ease;
 }
 
 @keyframes fadeIn {
@@ -42,14 +43,14 @@ header h1 {
     height: auto;
     max-height: 400px;
     border-radius: 10px;
-    object-fit: cover; /* ป้องกันรูปเบี้ยว */
+    object-fit: cover;
     display: block;
 }
 
 .blog-card p {
     margin: 15px 0 5px 0;
     line-height: 1.6;
-    word-wrap: break-word; /* ป้องกันข้อความยาวเกินกรอบ */
+    word-wrap: break-word;
 }
 
 .blog-card small {
@@ -57,7 +58,33 @@ header h1 {
     font-size: 0.8rem;
 }
 
-/* ปุ่มเพิ่มข้อมูลขนาดเล็กตรงกลาง */
+/* 3. ปุ่มลบ (🗑️) มุมขวาบน */
+.delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: 0.3s;
+    z-index: 5;
+}
+
+.delete-btn:hover {
+    background: #ff4f8b;
+    color: white;
+    transform: scale(1.1);
+}
+
+/* 4. ปุ่มเพิ่มข้อมูลขนาดเล็กตรงกลาง */
 .action-area {
     display: flex;
     justify-content: center;
@@ -83,15 +110,14 @@ header h1 {
     transform: translateY(-2px);
 }
 
-/* Modal / Pop-up */
+/* 5. Modal / Pop-up */
 .modal {
     display: none; 
     position: fixed;
     z-index: 1000;
-    top: 0; left: 0; 
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* ปรับพื้นหลังมืดลงอีกนิดให้ดูสวย */
-    backdrop-filter: blur(3px); /* ทำพื้นหลังเบลอ (ดูทันสมัย) */
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
 }
 
 .modal-content {
@@ -111,7 +137,6 @@ header h1 {
     font-size: 28px;
     cursor: pointer;
     color: #ccc;
-    transition: 0.2s;
 }
 
 .close-btn:hover { color: #ff4f8b; }
@@ -124,13 +149,12 @@ header h1 {
     padding: 12px; 
     border: 1px solid #ffd1e1; 
     border-radius: 12px;
+    box-sizing: border-box; /* สำคัญมาก: ป้องกัน input ทะลุขอบ */
     outline: none;
-    box-sizing: border-box; /* สำคัญมาก: เพื่อไม่ให้ input ทะลุขอบ */
 }
 
 .form-group input:focus, .form-group textarea:focus {
     border-color: #ff4f8b;
-    box-shadow: 0 0 5px rgba(255, 79, 139, 0.2);
 }
 
 .save-btn {
@@ -143,7 +167,6 @@ header h1 {
     cursor: pointer;
     font-size: 1rem;
     font-weight: 600;
-    transition: 0.3s;
 }
 
 .save-btn:hover {
