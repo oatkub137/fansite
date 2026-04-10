@@ -2,25 +2,89 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
+  <title>เกมลับ 💖</title>
 
-  <!-- เพิ่มฟอนต์ Kanit -->
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <link rel="icon" type="image/png" href="img/tom.png">
-
-  <title>ถึงเธอ 💌</title>
 
   <style>
     body {
-      text-align: center;
+      font-family: 'Kanit', sans-serif;
       background: #ffe6f0;
-      font-family: 'Kanit', sans-serif; /* ใช้ฟอนต์ตรงนี้ */
+      text-align: center;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 12px 24px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #yes {
+      background: #ff4d88;
+      color: white;
+    }
+
+    #no {
+      background: #ccc;
+      position: absolute;
     }
   </style>
 </head>
 
 <body>
-  <h1>ถึงเธอ 💌</h1>
-  <p>สุขสันต์วัะ อยู่ด้วยกันไปนานๆเลย ❤️</p>
+
+<h1 id="question">เธอรักเค้ามั้ย 💌</h1>
+
+<button id="yes">รัก 💖</button>
+<button id="no">ไม่รัก 😢</button>
+
+<script>
+let noTexts = [
+  "ไม่รักจริงหรอ 😢",
+  "คิดดีๆนะ...",
+  "แน่ใจแล้วหรอ 🥺",
+  "ไม่รักเค้าจริงๆเหรอ",
+  "กดใหม่อีกทีสิ 😭",
+  "เค้างอนแล้วนะ...",
+  "ยังไม่รักอีกเหรอ 😠"
+];
+
+let index = 0;
+
+const noBtn = document.getElementById("no");
+const question = document.getElementById("question");
+
+noBtn.addEventListener("click", () => {
+  // เปลี่ยนคำถาม
+  question.innerText = noTexts[index % noTexts.length];
+  index++;
+
+  // ทำให้ปุ่มหนี
+  let x = Math.random() * (window.innerWidth - 100);
+  let y = Math.random() * (window.innerHeight - 50);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+});
+
+document.getElementById("yes").addEventListener("click", () => {
+  document.body.innerHTML = `
+    <h1>เย้ 💖</h1>
+    <p>เค้าก็รักเธอเหมือนกันนะ อยู่ด้วยกันนานๆเลย 💕</p>
+  `;
+});
+</script>
+
 </body>
 </html>
