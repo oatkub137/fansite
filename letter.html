@@ -1,54 +1,63 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <title>เกมลับ 💖</title>
+<meta charset="UTF-8">
+<title>เกมลับ 💖</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      font-family: 'Kanit', sans-serif;
-      background: #ffe6f0;
-      text-align: center;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
+<style>
+  body {
+    font-family: 'Kanit', sans-serif;
+    background: linear-gradient(180deg,#fff0f5,#ffe6f0);
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 
-    h1 {
-      margin-bottom: 20px;
-    }
+  h1 {
+    margin-bottom: 30px;
+    font-size: 28px;
+  }
 
-    button {
-      padding: 12px 24px;
-      margin: 10px;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+  .btn {
+    width: 200px;
+    height: 70px;
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    margin: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.25);
+  }
 
-    #yes {
-      background: #ff4d88;
-      color: white;
-    }
+  .btn:active {
+    transform: scale(0.95);
+  }
 
-    #no {
-      background: #ccc;
-      position: absolute;
-    }
-  </style>
+  #yes {
+    background: linear-gradient(135deg,#ff6fa5,#ff3d7f);
+    color: white;
+  }
+
+  #no {
+    background: #e0e0e0;
+    color: #555;
+    position: absolute;
+  }
+</style>
 </head>
 
 <body>
 
 <h1 id="question">เธอรักเค้ามั้ย 💌</h1>
 
-<button id="yes">รัก 💖</button>
-<button id="no">ไม่รัก 😢</button>
+<button class="btn" id="yes">รัก 💖</button>
+<button class="btn" id="no">ไม่รัก 😢</button>
 
 <script>
 let noTexts = [
@@ -56,7 +65,6 @@ let noTexts = [
   "คิดดีๆนะ...",
   "แน่ใจแล้วหรอ 🥺",
   "ไม่รักเค้าจริงๆเหรอ",
-  "กดใหม่อีกทีสิ 😭",
   "เค้างอนแล้วนะ...",
   "ยังไม่รักอีกเหรอ 😠"
 ];
@@ -67,13 +75,12 @@ const noBtn = document.getElementById("no");
 const question = document.getElementById("question");
 
 noBtn.addEventListener("click", () => {
-  // เปลี่ยนคำถาม
   question.innerText = noTexts[index % noTexts.length];
   index++;
 
-  // ทำให้ปุ่มหนี
-  let x = Math.random() * (window.innerWidth - 100);
-  let y = Math.random() * (window.innerHeight - 50);
+  // หนีแบบน่ารักๆ
+  let x = Math.random() * (window.innerWidth - 220);
+  let y = Math.random() * (window.innerHeight - 100);
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
 });
@@ -81,7 +88,7 @@ noBtn.addEventListener("click", () => {
 document.getElementById("yes").addEventListener("click", () => {
   document.body.innerHTML = `
     <h1>เย้ 💖</h1>
-    <p>เค้าก็รักเธอเหมือนกันนะ อยู่ด้วยกันนานๆเลย 💕</p>
+    <p style="font-size:20px;">เค้าก็รักเธอเหมือนกันนะ อยู่ด้วยกันนานๆเลย 💕</p>
   `;
 });
 </script>
